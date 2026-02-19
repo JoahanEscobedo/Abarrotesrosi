@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "676445821020",
+    "project_id": "tiendarosi-9d079",
+    "storage_bucket": "tiendarosi-9d079.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676445821020:android:991dd05f99051f1f09ee99",
+        "android_client_info": {
+          "package_name": "schemas.android.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJVO_-imxDTuQ22VxxOeEocdgB9-nvrvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

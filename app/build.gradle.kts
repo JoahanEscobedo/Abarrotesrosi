@@ -1,9 +1,8 @@
 plugins {
-    //alias(libs.plugins.google.gms.google.services)
     // Add the dependency for the Google services Gradle plugin
     id("com.google.gms.google-services") version "4.4.4" apply false
     id("com.android.application")
-
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -33,8 +32,16 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
+
+    kotlin {
+        jvmToolchain(11)
+        compilerOptions {
+            freeCompilerArgs.add("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
+        }
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -45,7 +52,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.mediation.test.suite)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

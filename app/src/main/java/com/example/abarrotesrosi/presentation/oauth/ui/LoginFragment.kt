@@ -9,9 +9,6 @@ import androidx.fragment.app.Fragment
 import com.example.abarrotesrosi.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
-enum class ProviderType {
-    BASIC,
-}
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null

@@ -1,5 +1,6 @@
 package com.example.abarrotesrosi.presentation.oauth.ui
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,9 @@ import androidx.fragment.app.Fragment
 import com.example.abarrotesrosi.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
-//TODO: Podemos configurar de esta manera los de mas Frgaments
-//TODO: Pasaremos todo lo del AutActivity aqui
-//TODO: En la parte de navegacion, res -> navigation, encontraras las pantallas (grafoz)
+enum class ProviderType {
+    BASIC,
+}
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
@@ -22,22 +23,58 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
+        setup()
     }
 
-    private fun initView() {
-        binding.emailTextView.text = "email"
-        binding.providerTextView.text = "provider"
+    private fun setup() {
+        binding.loginButton.setOnClickListener {
+            val email = binding.inputEmail.text.toString()
+            val password = binding.inputPass.text.toString()
 
-        binding.logOutButton.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                FirebaseAuth.getInstance()
+                    .signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            navigateToHome()
+                        } else {
+                            showAlert()
+                        }
+                    }
+            } else {
+                binding.inputEmail.error = "Campo obligatorio"
+                binding.inputPass.error = "Campo obligatorio"
+            }
         }
+
+        //nos manda al framneto de resguistrarse
+        binding.reguistroButton.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(com.example.abarrotesrosi.R.id.nav_host_fragment, RegisterFragment()) // Asegúrate de que el ID coincida con tu contenedor
+                .addToBackStack(null)
+                .commit()
+        }
+    }
+
+    private fun showAlert() {
+        // En un Fragment usamos 'requireContext()' en lugar de 'this'
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Error")
+        builder.setMessage("Se ha producido un error autenticando al usuario. Verifica tus credenciales.")
+        builder.setPositiveButton("Aceptar", null)
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun navigateToHome() {
+        parentFragmentManager.beginTransaction()
+            .replace(com.example.abarrotesrosi.R.id.nav_host_fragment, homefragment())
+            .commit()
     }
 
     override fun onDestroyView() {

@@ -1,0 +1,524 @@
+Index: app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/LoginFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.abarrotesrosi.presentation.oauth.ui\r\n\r\nimport android.os.Bundle\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport androidx.fragment.app.Fragment\r\nimport com.example.abarrotesrosi.databinding.FragmentLoginBinding\r\nimport com.google.firebase.auth.FirebaseAuth\r\n\r\n//TODO: Podemos configurar de esta manera los de mas Frgaments\r\n//TODO: Pasaremos todo lo del AutActivity aqui\r\n//TODO: En la parte de navegacion, res -> navigation, encontraras las pantallas (grafoz)\r\nclass LoginFragment : Fragment() {\r\n\r\n    private var _binding: FragmentLoginBinding? = null\r\n    private val binding get() = _binding!!\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater,\r\n        container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View {\r\n        _binding = FragmentLoginBinding.inflate(inflater, container, false)\r\n        val view = binding.root\r\n        return view\r\n    }\r\n\r\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\r\n        super.onViewCreated(view, savedInstanceState)\r\n        initView()\r\n    }\r\n\r\n    private fun initView() {\r\n        binding.emailTextView.text = \"email\"\r\n        binding.providerTextView.text = \"provider\"\r\n\r\n        binding.logOutButton.setOnClickListener {\r\n            FirebaseAuth.getInstance().signOut()\r\n        }\r\n    }\r\n\r\n    override fun onDestroyView() {\r\n        super.onDestroyView()\r\n        _binding = null\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/LoginFragment.kt b/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/LoginFragment.kt
+--- a/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/LoginFragment.kt	(revision 9630f7a18c2ddba3ba695db613ae1948e4aad1fb)
++++ b/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/LoginFragment.kt	(date 1772034846931)
+@@ -4,8 +4,12 @@
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
++import androidx.appcompat.app.AlertDialog
++import androidx.compose.ui.semantics.error
++import androidx.compose.ui.semantics.text
+ import androidx.fragment.app.Fragment
+ import com.example.abarrotesrosi.databinding.FragmentLoginBinding
++import com.example.abarrotesrosi.presentation.oauth.ProviderType
+ import com.google.firebase.auth.FirebaseAuth
+ 
+ //TODO: Podemos configurar de esta manera los de mas Frgaments
+@@ -44,4 +48,44 @@
+         super.onDestroyView()
+         _binding = null
+     }
+-}
+\ No newline at end of file
++
++
++    // LOGIN (Corregido: signIn en lugar de createUser)TODO: Agregar esto en el login fragment
++    binding.LoginBtn.setOnClickListener
++    {
++        val email = binding.EmailImput.text.toString()
++        val password = binding.PasswordImput.text.toString()
++
++        if (email.isNotEmpty() && password.isNotEmpty()) {
++            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
++                .addOnCompleteListener { task ->
++                    if (task.isSuccessful) {
++                        val userEmail = task.result?.user?.email ?: ""
++                        showHome(userEmail, ProviderType.BASIC)
++                    } else {
++                        showAlert()
++                    }
++                }
++        } else {
++            // Opcional: Mostrar error si los campos están vacíos
++            binding.EmailImput.error = "Campo requerido"
++        }
++    }
++
++}
++
++    // Función para mostrar alerta de error
++    private fun showAlert() {
++        val builder = AlertDialog.Builder(requireContext())
++        builder.setTitle("Error")
++        builder.setMessage("Se ha producido un error autenticando al usuario")
++        builder.setPositiveButton("Aceptar", null)
++        val dialog: AlertDialog = builder.create()
++        dialog.show()
++    }
++
++    // Función para navegar a la siguiente pantalla (Home)
++    private fun showHome(email: String, provider: ProviderType) {
++        binding.emailTextView.text = email
++        binding.providerTextView.text = provider.name
++    }
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_aut.xml
+===================================================================
+diff --git a/app/src/main/res/layout/activity_aut.xml b/app/src/main/res/layout/activity_aut.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/activity_aut.xml	(revision 9630f7a18c2ddba3ba695db613ae1948e4aad1fb)
++++ /dev/null	(revision 9630f7a18c2ddba3ba695db613ae1948e4aad1fb)
+@@ -1,72 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:id="@+id/main"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    android:background="@drawable/login"
+-    android:gravity="center"
+-    android:padding="16dp"
+-    tools:context=".presentation.oauth.AutActivity">
+-
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:gravity="center"
+-        android:orientation="vertical" >
+-    <ImageView
+-            android:layout_width="160dp"
+-            android:layout_height="160dp"
+-            android:src="@drawable/icon_aacount" />
+-
+-        <EditText
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:hint="Email"
+-            android:layout_marginTop="20dp"
+-            android:textColor="@color/white"
+-            android:textColorHint="@color/white"
+-            android:textSize="30dp"
+-            android:background="@drawable/conner_rounded"
+-            android:padding="20dp"
+-            android:inputType="textEmailAddress"
+-            android:id="@+id/input_email"/>
+-
+-        <EditText
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:hint="Contrasña"
+-            android:layout_marginTop="20dp"
+-            android:textColor="@color/white"
+-            android:textColorHint="@color/white"
+-            android:textSize="30dp"
+-            android:background="@drawable/conner_rounded"
+-            android:padding="20dp"
+-            android:inputType="textPassword"
+-            android:id="@+id/input_pass"/>
+-        <Button
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:text="Login"
+-            android:backgroundTint="@color/black"
+-            android:textColor="@color/white"
+-            android:padding="19dp"
+-            android:layout_marginTop="18dp"
+-            android:textSize="20dp"
+-            android:id="@+id/login_button"/>
+-        <Button
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:text="Resguistro"
+-            android:backgroundTint="@color/black"
+-            android:textColor="@color/white"
+-            android:padding="19dp"
+-            android:layout_marginTop="18dp"
+-            android:textSize="20dp"
+-            android:id="@+id/reguistro_button"/>
+-
+-    </LinearLayout>
+-
+-
+-</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_login.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_login.xml b/app/src/main/res/layout/fragment_login.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/fragment_login.xml	(revision 9630f7a18c2ddba3ba695db613ae1948e4aad1fb)
++++ /dev/null	(revision 9630f7a18c2ddba3ba695db613ae1948e4aad1fb)
+@@ -1,51 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    tools:context=".presentation.oauth.ui.LoginFragment">
+-
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:gravity="center"
+-        android:orientation="vertical"
+-        tools:ignore="MissingConstraints">
+-        <TextView
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:hint="Eamial"
+-            android:layout_marginTop="20dp"
+-            android:textColor="@color/black"
+-            android:textColorHint="@color/black"
+-            android:textSize="30dp"
+-            android:background="@drawable/conner_rounded"
+-            android:padding="20dp"
+-            android:inputType="textEmailAddress"
+-            android:id="@+id/emailTextView"/>
+-
+-        <TextView
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:hint="Password"
+-            android:layout_marginTop="20dp"
+-            android:textColor="@color/black"
+-            android:textColorHint="@color/black"
+-            android:textSize="30dp"
+-            android:background="@drawable/conner_rounded"
+-            android:padding="20dp"
+-            android:inputType="textPassword"
+-            android:id="@+id/providerTextView"/>
+-        <Button
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:text="cerrar secion"
+-            android:backgroundTint="@color/black"
+-            android:textColor="@color/white"
+-            android:padding="19dp"
+-            android:layout_marginTop="18dp"
+-            android:textSize="20dp"
+-            android:id="@+id/logOutButton"/>
+-    </LinearLayout>
+-
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: settings.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>pluginManagement {\r\n    repositories {\r\n        google {\r\n            content {\r\n                includeGroupByRegex(\"com\\\\.android.*\")\r\n                includeGroupByRegex(\"com\\\\.google.*\")\r\n                includeGroupByRegex(\"androidx.*\")\r\n            }\r\n        }\r\n        mavenCentral()\r\n        gradlePluginPortal()\r\n    }\r\n}\r\ndependencyResolutionManagement {\r\n    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)\r\n    repositories {\r\n        google()\r\n        mavenCentral()\r\n    }\r\n}\r\n\r\nrootProject.name = \"AbarrotesRosi\"\r\ninclude(\":app\")\r\n 
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/settings.gradle.kts b/settings.gradle.kts
+--- a/settings.gradle.kts	(revision 9630f7a18c2ddba3ba695db613ae1948e4aad1fb)
++++ b/settings.gradle.kts	(date 1771952512166)
+@@ -11,6 +11,9 @@
+         gradlePluginPortal()
+     }
+ }
++plugins {
++    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
++}
+ dependencyResolutionManagement {
+     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+     repositories {
+Index: app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/RegisterFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.abarrotesrosi.presentation.oauth.ui\r\n\r\nimport android.os.Bundle\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport androidx.fragment.app.Fragment\r\nimport com.example.abarrotesrosi.databinding.FragmentRegisterBinding\r\n\r\nclass RegisterFragment : Fragment() {\r\n\r\n    private var _binding: FragmentRegisterBinding? = null\r\n    private val binding get() = _binding!!\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater,\r\n        container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View {\r\n        _binding = FragmentRegisterBinding.inflate(inflater, container, false)\r\n        val view = binding.root\r\n        return view\r\n    }\r\n\r\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\r\n        super.onViewCreated(view, savedInstanceState)\r\n        initView()\r\n    }\r\n\r\n    private fun initView() {\r\n\r\n    }\r\n\r\n    override fun onDestroyView() {\r\n        super.onDestroyView()\r\n        _binding = null\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/RegisterFragment.kt b/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/RegisterFragment.kt
+--- a/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/RegisterFragment.kt	(revision 9630f7a18c2ddba3ba695db613ae1948e4aad1fb)
++++ b/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/RegisterFragment.kt	(date 1772033715272)
+@@ -6,6 +6,8 @@
+ import android.view.ViewGroup
+ import androidx.fragment.app.Fragment
+ import com.example.abarrotesrosi.databinding.FragmentRegisterBinding
++import com.example.abarrotesrosi.presentation.oauth.ProviderType
++import com.google.firebase.auth.FirebaseAuth
+ 
+ class RegisterFragment : Fragment() {
+ 
+@@ -35,4 +37,20 @@
+         super.onDestroyView()
+         _binding = null
+     }
++
++    // REGISTRO TODO: Agregar esto en el registro fragment
++    ReguistreBtn.setOnClickListener {
++        if (EmailImput.text.isNotEmpty() && PasswordImput.text.isNotEmpty()) {
++            FirebaseAuth.getInstance().createUserWithEmailAndPassword(
++                EmailImput.text.toString(),
++                PasswordImput.text.toString()
++            ).addOnCompleteListener {
++                if (it.isSuccessful) {
++                    showhome(it.result?.user?.email ?: "", ProviderType.BASIC)
++                } else {
++                    showalert()
++                }
++            }
++        }
++    }
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_main1.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main1.xml b/app/src/main/res/layout/activity_main1.xml
+new file mode 100644
+--- /dev/null	(date 1771900180050)
++++ b/app/src/main/res/layout/activity_main1.xml	(date 1771900180050)
+@@ -0,0 +1,21 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    android:id="@+id/main"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".presentation.main.MainActivity">
++
++    <androidx.fragment.app.FragmentContainerView
++        android:id="@+id/nav_host_fragment"
++        android:name="androidx.navigation.fragment.NavHostFragment"
++        android:layout_width="0dp"
++        android:layout_height="0dp"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:navGraph="@navigation/nav_grap" />
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/abarrotesrosi/presentation/oauth/AutActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.abarrotesrosi.presentation.oauth\r\n\r\nimport android.app.AlertDialog\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.widget.Button\r\nimport android.widget.EditText\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport com.example.abarrotesrosi.presentation.main.MainActivity\r\nimport com.example.abarrotesrosi.R\r\nimport com.google.firebase.auth.FirebaseAuth\r\n\r\nenum class ProviderType {\r\n    BASIC\r\n}\r\n\r\n//TODO: Cuando pasemos la logica al fragmento, borremo este.\r\nclass AutActivity : AppCompatActivity() {\r\n\r\n    lateinit var EmailImput: EditText //TODO: ESto ya no se utilizara por que usaremos binding, es muy viejo\r\n    lateinit var PasswordImput: EditText\r\n    lateinit var LoginBtn: Button\r\n    lateinit var ReguistreBtn: Button\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_aut)\r\n\r\n        EmailImput = findViewById(R.id.input_email)//TODO: ESto ya no se utilizara por que usaremos binding, es muy viejo\r\n        PasswordImput = findViewById(R.id.input_pass)\r\n        LoginBtn = findViewById(R.id.login_button)\r\n        ReguistreBtn = findViewById(R.id.reguistro_button)\r\n\r\n        setup()\r\n    }\r\n\r\n    //TODO: Login es para entrar y registro para registrar, son dos pantalla independientes.\r\n    private fun setup() {\r\n        title = \"Autenticacion\" //TODO: Agregar en un strings\r\n\r\n        // REGISTRO TODO: Agregar esto en el registro fragment\r\n        ReguistreBtn.setOnClickListener {\r\n            if (EmailImput.text.isNotEmpty() && PasswordImput.text.isNotEmpty()) {\r\n                FirebaseAuth.getInstance().createUserWithEmailAndPassword(\r\n                    EmailImput.text.toString(),\r\n                    PasswordImput.text.toString()\r\n                ).addOnCompleteListener {\r\n                    if (it.isSuccessful) {\r\n                        showhome(it.result?.user?.email ?: \"\", ProviderType.BASIC)\r\n                    } else {\r\n                        showalert()\r\n                    }\r\n                }\r\n            }\r\n        }\r\n\r\n        // LOGIN (Corregido: signIn en lugar de createUser)TODO: Agregar esto en el login fragment\r\n        LoginBtn.setOnClickListener {\r\n            if (EmailImput.text.isNotEmpty() && PasswordImput.text.isNotEmpty()) {\r\n                FirebaseAuth.getInstance().signInWithEmailAndPassword(\r\n                    EmailImput.text.toString(),\r\n                    PasswordImput.text.toString()\r\n                ).addOnCompleteListener {\r\n                    if (it.isSuccessful) {\r\n                        showhome(it.result?.user?.email ?: \"\", ProviderType.BASIC)\r\n                    } else {\r\n                        showalert()\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    private fun showalert() { //TODO: Las funciones tienen que ser tipo camello, ejemplo: showAlert()\r\n        val builder = AlertDialog.Builder(this)\r\n        builder.setTitle(\"Error\")\r\n        builder.setMessage(\"Se ha producido un error autenticando al usuario\")\r\n        builder.setPositiveButton(\"aceptar\", null)\r\n        builder.create().show()\r\n    }\r\n\r\n    private fun showhome(email: String, provider: ProviderType) {\r\n        val homeIntent = Intent(this, MainActivity::class.java).apply {\r\n            putExtra(\"email\", email)\r\n            putExtra(\"provider\", provider.name)\r\n        }\r\n        startActivity(homeIntent)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/AutActivity.kt b/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/AutActivity.kt
+--- a/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/AutActivity.kt	(revision 9630f7a18c2ddba3ba695db613ae1948e4aad1fb)
++++ b/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/AutActivity.kt	(date 1772035908265)
+@@ -17,73 +17,13 @@
+ //TODO: Cuando pasemos la logica al fragmento, borremo este.
+ class AutActivity : AppCompatActivity() {
+ 
+-    lateinit var EmailImput: EditText //TODO: ESto ya no se utilizara por que usaremos binding, es muy viejo
+-    lateinit var PasswordImput: EditText
+-    lateinit var LoginBtn: Button
+-    lateinit var ReguistreBtn: Button
+-
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+-        setContentView(R.layout.activity_aut)
+-
+-        EmailImput = findViewById(R.id.input_email)//TODO: ESto ya no se utilizara por que usaremos binding, es muy viejo
+-        PasswordImput = findViewById(R.id.input_pass)
+-        LoginBtn = findViewById(R.id.login_button)
+-        ReguistreBtn = findViewById(R.id.reguistro_button)
+-
++        setContentView(R.layout.activity_main)
+         setup()
+     }
+ 
+-    //TODO: Login es para entrar y registro para registrar, son dos pantalla independientes.
+     private fun setup() {
+         title = "Autenticacion" //TODO: Agregar en un strings
+-
+-        // REGISTRO TODO: Agregar esto en el registro fragment
+-        ReguistreBtn.setOnClickListener {
+-            if (EmailImput.text.isNotEmpty() && PasswordImput.text.isNotEmpty()) {
+-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+-                    EmailImput.text.toString(),
+-                    PasswordImput.text.toString()
+-                ).addOnCompleteListener {
+-                    if (it.isSuccessful) {
+-                        showhome(it.result?.user?.email ?: "", ProviderType.BASIC)
+-                    } else {
+-                        showalert()
+-                    }
+-                }
+-            }
+-        }
+-
+-        // LOGIN (Corregido: signIn en lugar de createUser)TODO: Agregar esto en el login fragment
+-        LoginBtn.setOnClickListener {
+-            if (EmailImput.text.isNotEmpty() && PasswordImput.text.isNotEmpty()) {
+-                FirebaseAuth.getInstance().signInWithEmailAndPassword(
+-                    EmailImput.text.toString(),
+-                    PasswordImput.text.toString()
+-                ).addOnCompleteListener {
+-                    if (it.isSuccessful) {
+-                        showhome(it.result?.user?.email ?: "", ProviderType.BASIC)
+-                    } else {
+-                        showalert()
+-                    }
+-                }
+-            }
+-        }
+-    }
+-
+-    private fun showalert() { //TODO: Las funciones tienen que ser tipo camello, ejemplo: showAlert()
+-        val builder = AlertDialog.Builder(this)
+-        builder.setTitle("Error")
+-        builder.setMessage("Se ha producido un error autenticando al usuario")
+-        builder.setPositiveButton("aceptar", null)
+-        builder.create().show()
+-    }
+-
+-    private fun showhome(email: String, provider: ProviderType) {
+-        val homeIntent = Intent(this, MainActivity::class.java).apply {
+-            putExtra("email", email)
+-            putExtra("provider", provider.name)
+-        }
+-        startActivity(homeIntent)
+     }
+ }
+\ No newline at end of file
+Index: local.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>## This file must *NOT* be checked into Version Control Systems,\r\n# as it contains information specific to your local configuration.\r\n#\r\n# Location of the SDK. This is only used by Gradle.\r\n# For customization when using a Version Control System, please read the\r\n# header note.\r\n#Mon Feb 23 18:54:15 CST 2026\r\nsdk.dir=/Users/josechtrejo/Library/Android/sdk\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/local.properties b/local.properties
+--- a/local.properties	(revision 9630f7a18c2ddba3ba695db613ae1948e4aad1fb)
++++ b/local.properties	(date 1771952081261)
+@@ -4,5 +4,5 @@
+ # Location of the SDK. This is only used by Gradle.
+ # For customization when using a Version Control System, please read the
+ # header note.
+-#Mon Feb 23 18:54:15 CST 2026
+-sdk.dir=/Users/josechtrejo/Library/Android/sdk
++#Tue Feb 24 10:54:41 CST 2026
++sdk.dir=C\:\\Users\\joaha\\AppData\\Local\\Android\\Sdk
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".presentation.main.MainActivity\">\r\n\r\n    <androidx.fragment.app.FragmentContainerView\r\n        android:id=\"@+id/nav_host_fragment\"\r\n        android:name=\"androidx.navigation.fragment.NavHostFragment\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"0dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:navGraph=\"@navigation/nav_grap\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	(revision 9630f7a18c2ddba3ba695db613ae1948e4aad1fb)
++++ b/app/src/main/res/layout/activity_main.xml	(date 1771900180050)
+@@ -1,21 +1,72 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:tools="http://schemas.android.com/tools"
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".presentation.main.MainActivity">
++    android:background="@drawable/login"
++    android:gravity="center"
++    android:padding="16dp"
++    tools:context=".presentation.oauth.AutActivity">
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:gravity="center"
++        android:orientation="vertical" >
++    <ImageView
++            android:layout_width="160dp"
++            android:layout_height="160dp"
++            android:src="@drawable/icon_aacount" />
++
++        <EditText
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:hint="Email"
++            android:layout_marginTop="20dp"
++            android:textColor="@color/white"
++            android:textColorHint="@color/white"
++            android:textSize="30dp"
++            android:background="@drawable/conner_rounded"
++            android:padding="20dp"
++            android:inputType="textEmailAddress"
++            android:id="@+id/input_email"/>
++
++        <EditText
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:hint="Contrasña"
++            android:layout_marginTop="20dp"
++            android:textColor="@color/white"
++            android:textColorHint="@color/white"
++            android:textSize="30dp"
++            android:background="@drawable/conner_rounded"
++            android:padding="20dp"
++            android:inputType="textPassword"
++            android:id="@+id/input_pass"/>
++        <Button
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:text="Login"
++            android:backgroundTint="@color/black"
++            android:textColor="@color/white"
++            android:padding="19dp"
++            android:layout_marginTop="18dp"
++            android:textSize="20dp"
++            android:id="@+id/login_button"/>
++        <Button
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:text="Resguistro"
++            android:backgroundTint="@color/black"
++            android:textColor="@color/white"
++            android:padding="19dp"
++            android:layout_marginTop="18dp"
++            android:textSize="20dp"
++            android:id="@+id/reguistro_button"/>
+ 
+-    <androidx.fragment.app.FragmentContainerView
+-        android:id="@+id/nav_host_fragment"
+-        android:name="androidx.navigation.fragment.NavHostFragment"
+-        android:layout_width="0dp"
+-        android:layout_height="0dp"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent"
+-        app:navGraph="@navigation/nav_grap" />
++    </LinearLayout>
++
+ 
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
++</RelativeLayout>
+\ No newline at end of file
+Index: .gradle/config.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Mon Feb 23 18:54:15 CST 2026\r\njava.home=/Applications/Android Studio.app/Contents/jbr/Contents/Home\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/.gradle/config.properties b/.gradle/config.properties
+--- a/.gradle/config.properties	(revision 9630f7a18c2ddba3ba695db613ae1948e4aad1fb)
++++ b/.gradle/config.properties	(date 1771953154787)
+@@ -1,2 +1,2 @@
+-#Mon Feb 23 18:54:15 CST 2026
+-java.home=/Applications/Android Studio.app/Contents/jbr/Contents/Home
++#Tue Feb 24 11:12:34 CST 2026
++java.home=C\:\\Program Files\\Android\\Android Studio\\jbr

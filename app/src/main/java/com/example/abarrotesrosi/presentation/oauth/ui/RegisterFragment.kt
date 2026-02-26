@@ -8,12 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.abarrotesrosi.databinding.FragmentRegisterBinding
-import com.example.abarrotesrosi.presentation.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
-
-enum class ProviderType {
-    BASIC, GOOGLE, FACEBOOK
-}
+import androidx.navigation.fragment.findNavController
+import com.example.abarrotesrosi.R
 
 class RegisterFragment : Fragment() {
 
@@ -26,24 +23,47 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setup()
     }
 
     private fun setup() {
         binding.reguistrarButton.setOnClickListener {
-            val email = binding.inputEmail.text.toString()
-            val password = binding.inputPass.text.toString()
+            val email = binding.inputEmail.text.toString().trim()
+            val password = binding.inputPass.text.toString().trim()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 FirebaseAuth.getInstance()
                     .createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            val userEmail = task.result?.user?.email ?: ""
-                            showHome(userEmail, ProviderType.BASIC)
+                            FirebaseAuth.getInstance().signOut()
+                            if (isAdded) {
+                                AlertDialog.Builder(requireContext())
+                                    .setTitle("Registro Exitoso")
+                                    .setMessage("¡Bienvenido! Tu cuenta ha sido creada correctamente.")
+                                    .setPositiveButton("Ir al Login") { _, _ ->
+
+                                        val volviste = findNavController().popBackStack()
+
+                                        if (!volviste) {
+                                            try {
+                                                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                                            } catch (e: Exception) {
+                                                showAlert("Error de navegación: ${e.localizedMessage}")
+                                            }
+                                        }
+                                    }
+                                    .setCancelable(false)
+                                    .show()
+                            }
                         } else {
-                            showAlert()
+                            val errorMsg = task.exception?.localizedMessage ?: "Error desconocido"
+                            showAlert(errorMsg)
                         }
                     }
             } else {
@@ -53,32 +73,13 @@ class RegisterFragment : Fragment() {
         }
     }
 
+
     private fun showAlert(message: String = "Se ha producido un error autenticando al usuario.") {
         AlertDialog.Builder(requireContext())
             .setTitle("Error")
             .setMessage(message)
             .setPositiveButton("Aceptar", null)
             .show()
-    }
-
-    private fun showHome(email: String, provider: ProviderType) {
-        // Intent para ir a MainActivity
-        val homeIntent = Intent(requireContext(), MainActivity::class.java).apply {
-            // Pasamos los datos necesarios
-            putExtra("email", email)
-            putExtra("provider", provider.name)
-            // Flags para evitar que el usuario regrese a la pantalla de registro
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        }
-        startActivity(homeIntent)
-
-        // Finalizamos la actividad contenedora del fragment
-        activity?.finish()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setup()
     }
 
     override fun onDestroyView() {

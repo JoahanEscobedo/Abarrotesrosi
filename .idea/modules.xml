@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AbarrotesRosi.iml" filepath="$PROJECT_DIR$/.idea/modules/AbarrotesRosi.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AbarrotesRosi.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AbarrotesRosi.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AbarrotesRosi.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AbarrotesRosi.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AbarrotesRosi.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AbarrotesRosi.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AbarrotesRosi.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AbarrotesRosi.app.unitTest.iml" />
     </modules>

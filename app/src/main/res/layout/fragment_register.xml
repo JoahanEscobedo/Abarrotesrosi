@@ -47,7 +47,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Resguistro"
+            android:text="Resguistrar"
             android:backgroundTint="@color/black"
             android:textColor="@color/white"
             android:padding="19dp"

@@ -3,11 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.oauth.ui.homefragment">
+    tools:context=".presentation.oauth.ui.HomeFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="Bienvenido"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:gravity="center" />
 
+    <Button
+        android:id="@+id/btnclosest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="410dp"
+        android:backgroundTint="@color/black"
+        android:padding="19dp"
+        android:text="Cerrar sesion"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
 </FrameLayout>

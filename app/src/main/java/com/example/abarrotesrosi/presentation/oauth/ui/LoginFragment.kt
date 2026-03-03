@@ -16,6 +16,8 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,47 +29,56 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        auth = FirebaseAuth.getInstance()
+
+        login()
+        register()
+    }
+
+    private fun register() {
         binding.reguistroButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
     }
 
-    private fun setup() {
-        binding.loginButton.setOnClickListener {
-            val email = binding.inputEmail.text.toString()
-            val password = binding.inputPass.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                FirebaseAuth.getInstance()
-                    .signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            navigateToHome()
-                        } else {
-                            showAlert()
-                        }
-                    }
-            } else {
+    //esta es mi funcion login
+    private fun login() {
+        binding.loginButton.setOnClickListener {
+
+            val email = binding.inputEmail.text.toString().trim()
+            val password = binding.inputPass.text.toString().trim()
+
+            if (email.isEmpty()) {
                 binding.inputEmail.error = "Campo obligatorio"
-                binding.inputPass.error = "Campo obligatorio"
+                return@setOnClickListener
             }
+
+            if (password.isEmpty()) {
+                binding.inputPass.error = "Campo obligatorio"
+                return@setOnClickListener
+            }
+
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener {
+                    findNavController().navigate(
+                        R.id.action_loginFragment_to_homeFragment
+                    )
+                }
+                .addOnFailureListener { e ->
+                    Log.e("LOGIN", e.message.toString())
+                    showAlert()
+                }
         }
     }
 
     private fun showAlert() {
-        // En un Fragment usamos 'requireContext()' en lugar de 'this'
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Error")
         builder.setMessage("Se ha producido un error autenticando al usuario. Verifica tus credenciales.")
         builder.setPositiveButton("Aceptar", null)
         val dialog = builder.create()
         dialog.show()
-    }
-
-    private fun navigateToHome() {
-        parentFragmentManager.beginTransaction()
-            .replace(com.example.abarrotesrosi.R.id.nav_host_fragment, homefragment())
-            .commit()
     }
 
     override fun onDestroyView() {

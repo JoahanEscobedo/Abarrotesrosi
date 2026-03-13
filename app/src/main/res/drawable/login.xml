@@ -2,5 +2,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <gradient android:type="linear" android:angle="90"
-        android:startColor="#D799E8" android:endColor="#D64EFC"/>
+        android:startColor="#D799E8" android:endColor="#FEF2FF"/>
 </shape>

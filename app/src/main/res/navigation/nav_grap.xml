@@ -38,6 +38,24 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_DataFragment"
+            app:destination="@id/DataFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DataFragment"
+        android:name="com.example.abarrotesrosi.presentation.oauth.ui.DataFragment"
+        android:label="fragment_data"
+        tools:layout="@layout/fragment_data">
+
+        <action
+            android:id="@+id/action_DataFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_DataFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+
     </fragment>
 
 </navigation>

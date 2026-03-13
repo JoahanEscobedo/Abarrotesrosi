@@ -310,8 +310,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="fffcfc" />
-                            <entry key="outputName" value="icon_aacount" />
+                            <entry key="color" value="ffa7a7" />
+                            <entry key="outputName" value="user_img" />
                             <entry key="sourceFile" value="C:\Users\joaha\StudioProjects\AbarrotesRosi" />
                           </map>
                         </option>

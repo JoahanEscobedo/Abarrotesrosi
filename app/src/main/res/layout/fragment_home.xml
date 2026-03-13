@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_home"
     tools:context=".presentation.oauth.ui.HomeFragment">
 
     <TextView
@@ -22,6 +23,17 @@
         android:backgroundTint="@color/black"
         android:padding="19dp"
         android:text="Cerrar sesion"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btndata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="510dp"
+        android:backgroundTint="@color/black"
+        android:padding="19dp"
+        android:text="Ver datos usuario"
         android:textColor="@color/white"
         android:textSize="20dp" />
 </FrameLayout>

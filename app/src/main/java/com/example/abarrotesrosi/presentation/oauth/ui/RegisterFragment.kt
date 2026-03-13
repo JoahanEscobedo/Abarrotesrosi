@@ -1,7 +1,6 @@
 package com.example.abarrotesrosi.presentation.oauth.ui
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +8,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.abarrotesrosi.databinding.FragmentRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
+import android.net.Uri
+import android.content.Intent
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.firestore.FirebaseFirestore
 import androidx.navigation.fragment.findNavController
 import com.example.abarrotesrosi.R
+
 
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+    private val bd = FirebaseFirestore.getInstance()
+    private var selectedImageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,43 +38,35 @@ class RegisterFragment : Fragment() {
     }
 
     private fun setup() {
+
+        binding.btnUploadPhoto.setOnClickListener {
+            openGallery()
+        }
+
         binding.reguistrarButton.setOnClickListener {
+
             val email = binding.inputEmail.text.toString().trim()
             val password = binding.inputPass.text.toString().trim()
+            val name = binding.inputName.text.toString().trim()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
+            if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty()) {
+
                 FirebaseAuth.getInstance()
                     .createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
+
                         if (task.isSuccessful) {
-                            FirebaseAuth.getInstance().signOut()
-                            if (isAdded) {
-                                AlertDialog.Builder(requireContext())
-                                    .setTitle("Registro Exitoso")
-                                    .setMessage("¡Bienvenido! Tu cuenta ha sido creada correctamente.")
-                                    .setPositiveButton("Ir al Login") { _, _ ->
 
-                                        val volviste = findNavController().popBackStack()
+                            val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
-                                        if (!volviste) {
-                                            try {
-                                                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-                                            } catch (e: Exception) {
-                                                showAlert("Error de navegación: ${e.localizedMessage}")
-                                            }
-                                        }
-                                    }
-                                    .setCancelable(false)
-                                    .show()
-                            }
+                            uploadPhoto(userId, name, email)
+
+                            findNavController().navigate(R.id.loginFragment)
+
                         } else {
-                            val errorMsg = task.exception?.localizedMessage ?: "Error desconocido"
-                            showAlert(errorMsg)
+                            showAlert(task.exception?.localizedMessage ?: "Error")
                         }
                     }
-            } else {
-                if (email.isEmpty()) binding.inputEmail.error = "Campo obligatorio"
-                if (password.isEmpty()) binding.inputPass.error = "Campo obligatorio"
             }
         }
     }
@@ -81,6 +79,52 @@ class RegisterFragment : Fragment() {
             .setPositiveButton("Aceptar", null)
             .show()
     }
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, 100)
+    }
+
+    private fun uploadPhoto(userId: String, name: String, email: String) {
+
+        val storageRef = FirebaseStorage.getInstance().reference
+            .child("users/$userId/profile.jpg")
+
+        selectedImageUri?.let { uri ->
+
+            storageRef.putFile(uri)
+                .addOnSuccessListener {
+
+                    storageRef.downloadUrl.addOnSuccessListener { downloadUrl ->
+
+                        saveData(userId, name, email, downloadUrl.toString())
+
+                    }
+
+                }
+                .addOnFailureListener {
+                    showAlert("Error subiendo la imagen")
+                }
+
+        } ?: run {
+            saveData(userId, name, email, "")
+        }
+    }
+
+    private fun saveData(userId: String, name: String, email: String, photo: String) {
+
+        val userMap = hashMapOf(
+            "name" to name,
+            "email" to email,
+            "photo" to photo
+        )
+
+        bd.collection("users")
+            .document(userId)
+            .set(userMap)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

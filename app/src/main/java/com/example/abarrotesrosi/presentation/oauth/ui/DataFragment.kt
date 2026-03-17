@@ -39,9 +39,6 @@ class DataFragment : Fragment() {
         binding.btnuserdata.setOnClickListener {
             consultarDatos()
         }
-        binding.btnhome.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
-        }
         binding.btnuseredit.setOnClickListener {
             editarNombre()
         }

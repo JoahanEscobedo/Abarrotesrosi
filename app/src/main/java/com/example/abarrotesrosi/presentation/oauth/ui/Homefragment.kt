@@ -26,7 +26,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataFragment()
         closeSession()
     }
 
@@ -42,13 +41,6 @@ class HomeFragment : Fragment() {
                     .setPopUpTo(R.id.homeFragment, true)
                     .build()
             )
-        }
-    }
-
-    private fun dataFragment() {
-        binding.btndata.setOnClickListener {
-            findNavController().navigate(R.id.DataFragment)
-
         }
     }
 

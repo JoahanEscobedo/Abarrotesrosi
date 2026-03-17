@@ -86,19 +86,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-    <Button
-        android:id="@+id/btnhome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:padding="19dp"
-        android:layout_marginTop="600dp"
-        android:textSize="20dp"
-        android:text="Regresar al Home"
-        android:textColor="@color/white"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

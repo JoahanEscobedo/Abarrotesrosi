@@ -19,21 +19,11 @@
         android:id="@+id/btnclosest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="410dp"
+        android:layout_marginTop="550dp"
         android:backgroundTint="@color/black"
         android:padding="19dp"
         android:text="Cerrar sesion"
         android:textColor="@color/white"
         android:textSize="20dp" />
 
-    <Button
-        android:id="@+id/btndata"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="510dp"
-        android:backgroundTint="@color/black"
-        android:padding="19dp"
-        android:text="Ver datos usuario"
-        android:textColor="@color/white"
-        android:textSize="20dp" />
 </FrameLayout>

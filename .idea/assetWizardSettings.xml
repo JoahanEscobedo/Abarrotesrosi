@@ -300,7 +300,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialsymbolsoutlined/add/outline_add_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialsymbolssharp/account_circle/sharp_account_circle_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -310,8 +310,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="fffcfc" />
-                            <entry key="outputName" value="add_produc" />
+                            <entry key="color" value="dcdc01" />
+                            <entry key="outputName" value="user_img" />
                             <entry key="sourceFile" value="C:\Users\joaha\StudioProjects\AbarrotesRosi" />
                           </map>
                         </option>

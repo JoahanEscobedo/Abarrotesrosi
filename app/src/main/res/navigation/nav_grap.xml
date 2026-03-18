@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_homeFragment_to_DataFragment"
             app:destination="@id/DataFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_ViewProductsFragment"
+            app:destination="@id/ViewProductsFragment" />
     </fragment>
 
     <fragment
@@ -55,7 +58,36 @@
         <action
             android:id="@+id/action_DataFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_DataFragment_to_ViewProductsFragment"
+            app:destination="@id/ViewProductsFragment" />
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/ViewProductsFragment"
+        android:name="com.example.abarrotesrosi.presentation.oauth.ui.ViewProductsFragment"
+        android:label="fragment_viewproducts"
+        tools:layout="@layout/fragment_viewproducts" >
+        <action
+            android:id="@+id/action_ViewProductsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_ViewProductsFragment_to_DataFragment"
+            app:destination="@id/DataFragment" />
+        <action
+            android:id="@+id/action_ViewProductsFragment_to_ProductsFragment"
+            app:destination="@id/ProductsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ProductsFragment"
+        android:name="com.example.abarrotesrosi.presentation.oauth.ui.ProductsFragment"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/action_ProductsFragment_to_ViewProductsFragment"
+            app:destination="@id/ViewProductsFragment" />
     </fragment>
 
 </navigation>

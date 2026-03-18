@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="70dp"
     tools:context=".presentation.oauth.ui.LoginFragment">
 
     <LinearLayout
@@ -14,15 +15,15 @@
         <ImageView
             android:layout_width="160dp"
             android:layout_height="160dp"
-            android:src="@drawable/icon_aacount" />
+            android:src="@drawable/user_img" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:layout_marginTop="20dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="30dp"
             android:background="@drawable/conner_rounded"
             android:padding="20dp"
@@ -34,8 +35,8 @@
             android:layout_height="wrap_content"
             android:hint="Contrasña"
             android:layout_marginTop="20dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="30dp"
             android:background="@drawable/conner_rounded"
             android:padding="20dp"
@@ -45,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="#FFC107"
             android:textColor="@color/white"
             android:padding="19dp"
             android:layout_marginTop="18dp"
@@ -55,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Resguistro"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="#FFC107"
             android:textColor="@color/white"
             android:padding="19dp"
             android:layout_marginTop="18dp"

@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_home"
     tools:context=".presentation.oauth.ui.DataFragment">
 
     <ImageView
@@ -48,22 +47,22 @@
         android:id="@+id/btnuserdata"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver datos del usuario"
-        android:backgroundTint="@color/black"
-        android:textColor="@color/white"
-        android:padding="19dp"
         android:layout_marginTop="280dp"
+        android:padding="19dp"
+        android:text="Ver datos del usuario"
+        android:textColor="@color/white"
         android:textSize="20dp"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="#FFC107"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
     <Button
         android:id="@+id/btnuseredit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guardar cambios"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="#FFC107"
         android:textColor="@color/white"
         android:padding="19dp"
         android:layout_marginTop="390dp"
@@ -77,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Eliminar usuario"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="#FFC107"
         android:textColor="@color/white"
         android:padding="19dp"
         android:layout_marginTop="490dp"

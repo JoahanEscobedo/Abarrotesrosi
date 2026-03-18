@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login"
     android:gravity="center"
     android:padding="16dp"
+    android:layout_marginTop="28dp"
     tools:context=".presentation.oauth.ui.RegisterFragment">
 
     <LinearLayout
@@ -17,15 +17,15 @@
         <ImageView
             android:layout_width="160dp"
             android:layout_height="160dp"
-            android:src="@drawable/icon_aacount" />
+            android:src="@drawable/user_img" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:layout_marginTop="20dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="30dp"
             android:background="@drawable/conner_rounded"
             android:padding="20dp"
@@ -37,8 +37,8 @@
             android:layout_height="wrap_content"
             android:hint="Contrasña"
             android:layout_marginTop="20dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="30dp"
             android:background="@drawable/conner_rounded"
             android:padding="20dp"
@@ -50,8 +50,8 @@
             android:layout_height="wrap_content"
             android:hint="Nombre de usuaio"
             android:layout_marginTop="20dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="30dp"
             android:background="@drawable/conner_rounded"
             android:padding="20dp"
@@ -61,13 +61,14 @@
             android:id="@+id/btn_upload_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#FF9800"
             android:text="Subir foto"
             android:layout_marginTop="10dp"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Resguistrar"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="#FFC107"
             android:textColor="@color/white"
             android:padding="19dp"
             android:layout_marginTop="18dp"

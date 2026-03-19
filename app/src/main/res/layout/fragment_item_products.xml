@@ -38,5 +38,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FFC107" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:gravity="end">
+
+            <ImageButton
+                android:id="@+id/btnEditar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="20dp"
+                app:srcCompat="@drawable/ic_edit"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="Editar"/>
+            <ImageButton
+                android:id="@+id/btnEliminar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_delete"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Eliminar"/>
+        </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

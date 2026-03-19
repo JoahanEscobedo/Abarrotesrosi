@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.loginFragment,
+                R.id.editProductsFragment,
                 R.id.registerFragment,
                 R.id.ProductsFragment -> {
                     binding.navView.visibility = View.GONE

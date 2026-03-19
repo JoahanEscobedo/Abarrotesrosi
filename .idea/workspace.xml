@@ -65,6 +65,11 @@
           <theme>@style/Theme.AbarrotesRosi</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_editproduc.xml">
+        <config>
+          <theme>@style/Theme.AbarrotesRosi</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
         <config>
           <theme>@style/Theme.AbarrotesRosi</theme>
@@ -111,12 +116,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f58b7d61-75e9-4d7b-8430-098d288ba31f" name="Changes" comment="ya esta la barra de navegacion">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ProductsFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ViewPrductsFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_item_products.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_products.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_viewproducts.xml" afterDir="false" />
+    <list default="true" id="f58b7d61-75e9-4d7b-8430-098d288ba31f" name="Changes" comment="ya esta la secion para agregar productos">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/EditProductsFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_delete.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_editproduc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" afterDir="false" />
@@ -125,19 +128,12 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/main/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/main/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/color/nav_item_color.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/color/nav_item_color.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/conner_rounded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/conner_rounded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/user_img.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/user_img.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_data.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_data.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_register.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_register.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ViewPrductsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ViewPrductsFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_item_products.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_item_products.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/nav_grap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/nav_grap.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -172,8 +168,8 @@
         <option value="valueResourceFile" />
         <option value="resourceFile" />
         <option value="Class" />
-        <option value="Kotlin Class" />
         <option value="layoutResourceFile" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -230,8 +226,8 @@
       <recent name="C:\Users\joaha\StudioProjects\AbarrotesRosi\app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\joaha\Desktop\Mi nani\AbarrotesRosi\app\src\main\res\color" />
       <recent name="C:\Users\joaha\Desktop\Mi nani\AbarrotesRosi\app\src\main\res\drawable" />
+      <recent name="C:\Users\joaha\Desktop\Mi nani\AbarrotesRosi\app\src\main\res\color" />
       <recent name="C:\Users\joaha\Desktop\Mi nani\AbarrotesRosi\app" />
       <recent name="C:\Users\joaha\StudioProjects\AbarrotesRosi\app" />
     </key>
@@ -444,7 +440,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773711628562</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="ya esta la secion para agregar productos">
+      <option name="closed" value="true" />
+      <created>1773863889448</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1773863889448</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -464,19 +468,20 @@
     <MESSAGE value="ya esta lito solo le voy a dar estetica" />
     <MESSAGE value="ya esta si para revisar" />
     <MESSAGE value="ya esta la barra de navegacion" />
-    <option name="LAST_COMMIT_MESSAGE" value="ya esta la barra de navegacion" />
+    <MESSAGE value="ya esta la secion para agregar productos" />
+    <option name="LAST_COMMIT_MESSAGE" value="ya esta la secion para agregar productos" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.example.abarrotesrosi">
           <value>
-            <CheckInfo lastCheckTimestamp="1773849220463" />
+            <CheckInfo lastCheckTimestamp="1773936399719" />
           </value>
         </entry>
         <entry key="com.example.abarrotesrosi.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1773849220463" />
+            <CheckInfo lastCheckTimestamp="1773936399731" />
           </value>
         </entry>
       </map>

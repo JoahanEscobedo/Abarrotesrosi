@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.abarrotesrosi.R
-import com.example.abarrotesrosi.databinding.FragmentDataBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.example.abarrotesrosi.databinding.FragmentDataBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import android.app.AlertDialog
 
@@ -29,8 +29,9 @@ class DataFragment : Fragment() {
 
         db = FirebaseFirestore.getInstance()
         uid = FirebaseAuth.getInstance().currentUser?.uid
-
+        closeSession()
         botones()
+
 
         return binding.root
     }
@@ -120,6 +121,21 @@ class DataFragment : Fragment() {
             }
             .setNegativeButton("Cancelar", null)
             .show()
+    }
+
+    private fun closeSession() {
+        binding.btnclosest.setOnClickListener {
+
+            FirebaseAuth.getInstance().signOut()
+
+            findNavController().navigate(
+                R.id.action_DataFragment_to_loginFragment,
+                null,
+                androidx.navigation.NavOptions.Builder()
+                    .setPopUpTo(R.id.DataFragment, true)
+                    .build()
+            )
+        }
     }
 
     override fun onDestroyView() {

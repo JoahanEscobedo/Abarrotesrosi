@@ -94,9 +94,7 @@
         android:name="com.example.abarrotesrosi.presentation.oauth.ui.EditProductsFragment"
         android:label="Editar Producto"
         tools:layout="@layout/fragment_editproduc" />
-
     <action
         android:id="@+id/action_ViewProductsFragment_to_editProductsFragment"
         app:destination="@id/editProductsFragment" />
-
 </navigation>

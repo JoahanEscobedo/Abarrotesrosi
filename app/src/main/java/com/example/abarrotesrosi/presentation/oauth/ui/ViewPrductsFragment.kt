@@ -105,7 +105,6 @@ class ViewProductsFragment : Fragment() {
     }
 }
 
-// 2. EL ADAPTADOR AHORA RECIBE EL PRODUCTO CORRECTAMENTE
 class ProductAdapter(
     private val lista: List<Product>,
     private val onDelete: (Product) -> Unit,

@@ -13,7 +13,6 @@ class EditProductsFragment : Fragment(R.layout.fragment_editproduc) {
     private lateinit var db: FirebaseFirestore
     private var productId: String? = null
 
-    // 1. Define las mismas categorías que usas en la pantalla de "Agregar"
     val categorias = listOf("Abarrotes", "Bebidas", "Limpieza", "Snacks", "Otros")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,10 +39,8 @@ class EditProductsFragment : Fragment(R.layout.fragment_editproduc) {
             etPiezas.setText(bundle.getInt("piezas").toString())
             etCodigo.setText(bundle.getString("codigo"))
 
-            // --- LÓGICA PARA QUE EL SPINNER SE QUEDE EN LA SELECCIÓN ACTUAL ---
             val categoriaDelProducto = bundle.getString("categoria")
             if (categoriaDelProducto != null) {
-                // Buscamos la posición del texto en nuestro array
                 val posicion = categorias.indexOf(categoriaDelProducto)
                 if (posicion >= 0) {
                     spCategoria.setSelection(posicion) // Esto marca la opción actual
@@ -51,7 +48,6 @@ class EditProductsFragment : Fragment(R.layout.fragment_editproduc) {
             }
         }
 
-        // 4. Botón para guardar los cambios en Firebase
         btnGuardar.setOnClickListener {
             val nombre = etNombre.text.toString()
             val descripcion = etDescripcion.text.toString()
@@ -74,7 +70,7 @@ class EditProductsFragment : Fragment(R.layout.fragment_editproduc) {
                     .update(productoActualizado)
                     .addOnSuccessListener {
                         Toast.makeText(requireContext(), "Producto actualizado", Toast.LENGTH_SHORT).show()
-                        findNavController().popBackStack() // Regresa a la lista
+                        findNavController().popBackStack()
                     }
                     .addOnFailureListener {
                         Toast.makeText(requireContext(), "Error al actualizar", Toast.LENGTH_SHORT).show()

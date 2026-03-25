@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_homeFragment_to_ViewProductsFragment"
             app:destination="@id/ViewProductsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_veiwBuyFragment"
+            app:destination="@id/veiwBuyFragment" />
     </fragment>
 
     <fragment
@@ -97,4 +100,9 @@
     <action
         android:id="@+id/action_ViewProductsFragment_to_editProductsFragment"
         app:destination="@id/editProductsFragment" />
+    <fragment
+        android:id="@+id/veiwBuyFragment"
+        android:name="com.example.abarrotesrosi.presentation.oauth.ui.VeiwBuyFragment"
+        android:label="Resumen de compra"
+        tools:layout="@layout/fragment_vewbuy" />
 </navigation>

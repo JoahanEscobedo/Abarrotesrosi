@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.loginFragment,
                 R.id.editProductsFragment,
                 R.id.registerFragment,
+                R.id.veiwBuyFragment,
                 R.id.ProductsFragment -> {
                     binding.navView.visibility = View.GONE
                 }

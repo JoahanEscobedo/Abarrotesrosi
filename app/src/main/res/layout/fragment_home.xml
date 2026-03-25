@@ -5,32 +5,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.oauth.ui.HomeFragment">
+    tools:context=".presentation.oauth.ui.HomeFragment"
+    tools:ignore="ExtraText">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProductsHome"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:paddingBottom="16dp"
+        android:clipToPadding="false"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toTopOf="@+id/btnFinalizarVenta"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/fragment_buyproducts" />
 
     <Button
         android:id="@+id/btnFinalizarVenta"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="FINALIZAR COMPRA"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="68dp"
         android:backgroundTint="#4CAF50"
+        android:text="FINALIZAR COMPRA"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_margin="16dp"
-
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.887" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

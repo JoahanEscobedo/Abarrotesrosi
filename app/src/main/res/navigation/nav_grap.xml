@@ -104,5 +104,18 @@
         android:id="@+id/veiwBuyFragment"
         android:name="com.example.abarrotesrosi.presentation.oauth.ui.VeiwBuyFragment"
         android:label="Resumen de compra"
-        tools:layout="@layout/fragment_vewbuy" />
+        tools:layout="@layout/fragment_vewbuy" >
+        <action
+            android:id="@+id/action_veiwBuyFragment_to_successBuyFragment"
+            app:destination="@id/successBuyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successBuyFragment"
+        android:name="com.example.abarrotesrosi.presentation.oauth.ui.SuccessBuyFragment"
+        android:label="successBuyFragment"
+        tools:layout="@layout/fragment_successbuy" >
+        <action
+            android:id="@+id/action_successBuyFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

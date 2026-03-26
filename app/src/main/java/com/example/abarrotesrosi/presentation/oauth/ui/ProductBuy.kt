@@ -8,5 +8,6 @@ data class ProductBuy(
     var precio: Double = 0.0,
     var piezas: Int = 0,
     var cantidad: Int = 0,
-    var stockOriginal: Int = 0
+    var stockOriginal: Int = 0,
+    var imagenBase64: String = ""
 ) : Serializable

@@ -105,6 +105,11 @@
           <theme>@style/Theme.AbarrotesRosi</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_successbuy.xml">
+        <config>
+          <theme>@style/Theme.AbarrotesRosi</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_vewbuy.xml">
         <config>
           <theme>@style/Theme.AbarrotesRosi</theme>
@@ -131,12 +136,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f58b7d61-75e9-4d7b-8430-098d288ba31f" name="Changes" comment="ya esta el punto de ventas solo falta boton finalizar compra">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ProductBuy.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/VeiwBuyFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/VewiBuyAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_itemvewbuy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_vewbuy.xml" afterDir="false" />
+    <list default="true" id="f58b7d61-75e9-4d7b-8430-098d288ba31f" name="Changes" comment="pantalla fin compra lista">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ImageUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/SuccessBuyFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_successbuy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" afterDir="false" />
@@ -145,14 +148,21 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/main/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/main/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/Homefragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/Homefragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/EditProductsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/EditProductsFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ProductBuy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ProductBuy.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ProductBuyAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ProductBuyAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ProductsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ProductsFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/VeiwBuyFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/VeiwBuyFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ViewPrductsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/abarrotesrosi/presentation/oauth/ui/ViewPrductsFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_item_products.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_itemproducts.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_viewproducts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_viewproducts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_buyproducts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_buyproducts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_editproduc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_editproduc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_itemproducts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_itemproducts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_products.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_products.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/nav_grap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/nav_grap.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -197,8 +207,12 @@
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
+    {
+      &quot;assignee&quot;: &quot;JoahanEscobedo&quot;
+    }
+  ],
   &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
     &quot;assignee&quot;: &quot;JoahanEscobedo&quot;
   }
 }</component>
@@ -483,7 +497,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774383311774</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="pantalla fin compra lista">
+      <option name="closed" value="true" />
+      <created>1774541397298</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1774541397298</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -506,19 +528,20 @@
     <MESSAGE value="ya esta la secion para agregar productos" />
     <MESSAGE value="agregar productos eliminar producto solucionando problema" />
     <MESSAGE value="ya esta el punto de ventas solo falta boton finalizar compra" />
-    <option name="LAST_COMMIT_MESSAGE" value="ya esta el punto de ventas solo falta boton finalizar compra" />
+    <MESSAGE value="pantalla fin compra lista" />
+    <option name="LAST_COMMIT_MESSAGE" value="pantalla fin compra lista" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.example.abarrotesrosi">
           <value>
-            <CheckInfo lastCheckTimestamp="1774374902509" />
+            <CheckInfo lastCheckTimestamp="1774540676742" />
           </value>
         </entry>
         <entry key="com.example.abarrotesrosi.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1774374902505" />
+            <CheckInfo lastCheckTimestamp="1774540676740" />
           </value>
         </entry>
       </map>

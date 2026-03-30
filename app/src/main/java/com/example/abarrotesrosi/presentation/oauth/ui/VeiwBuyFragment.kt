@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,8 @@ class VeiwBuyFragment : Fragment() {
 
     private val db = FirebaseFirestore.getInstance()
 
+    private var totalCompra: Double = 0.0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,12 +36,12 @@ class VeiwBuyFragment : Fragment() {
 
         @Suppress("DEPRECATION")
         val productos = arguments?.getSerializable("productos") as? ArrayList<ProductBuy> ?: arrayListOf()
-        val total = arguments?.getDouble("total", 0.0) ?: 0.0
+        totalCompra = arguments?.getDouble("total", 0.0) ?: 0.0
 
         binding.tvResumenCompra.layoutManager = LinearLayoutManager(requireContext())
         binding.tvResumenCompra.adapter = VewiBuyAdapter(productos)
 
-        binding.tvTotal.text = "$${String.format("%.2f", total)}"
+        binding.tvTotal.text = "$${String.format("%.2f", totalCompra)}"
 
         binding.btnComprar.setOnClickListener {
             if (productos.isEmpty()) {
@@ -113,7 +116,11 @@ class VeiwBuyFragment : Fragment() {
             .addOnSuccessListener {
                 Toast.makeText(requireContext(), "Compra realizada con éxito", Toast.LENGTH_SHORT).show()
 
-                findNavController().navigate(R.id.homeFragment)
+                val bundle = bundleOf(
+                    "total" to totalCompra
+                )
+
+                findNavController().navigate(R.id.successBuyFragment, bundle)
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "Error al actualizar stock", Toast.LENGTH_SHORT).show()

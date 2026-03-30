@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="50dp"
+    android:layout_marginTop="15dp"
     android:background="#F5F5F5">
 
     <LinearLayout
@@ -12,7 +12,23 @@
         android:orientation="vertical"
         android:padding="20dp"
         tools:ignore="MissingConstraints">
-
+        <ImageView
+            android:id="@+id/imgProducto"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logorosi"
+            android:background="#DDDDDD" />
+        <Button
+            android:id="@+id/btnSeleccionarImagen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cambiar Imagen"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#FFC107"
+            android:textColor="#FFF"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

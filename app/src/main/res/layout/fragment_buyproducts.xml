@@ -13,7 +13,13 @@
         android:padding="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+        <ImageView
+            android:id="@+id/imgProductoBuy"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logorosi"
+            android:background="#DDDDDD"/>
         <TextView
             android:id="@+id/tvNombre"
             android:textSize="18sp"

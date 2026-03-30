@@ -1,21 +1,23 @@
 package com.example.abarrotesrosi.presentation.oauth.ui
 
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.abarrotesrosi.R
 
-// 1. DATA CLASS FUERA DE LAS CLASES PARA QUE SEA ACCESIBLE
 data class Product(
     var id: String = "",
     val nombre: String = "",
@@ -23,7 +25,8 @@ data class Product(
     val precio: Double = 0.0,
     val piezas: Int = 0,
     val categoria: String = "",
-    val codigo: String = ""
+    val codigo: String = "",
+    val imagenBase64: String = ""
 )
 
 class ViewProductsFragment : Fragment() {
@@ -44,7 +47,6 @@ class ViewProductsFragment : Fragment() {
 
         db = FirebaseFirestore.getInstance()
 
-        // Ahora el adaptador reconocerá "Product" sin problemas
         adapter = ProductAdapter(
             listaProductos,
             onDelete = { eliminarProducto(it) },
@@ -96,6 +98,7 @@ class ViewProductsFragment : Fragment() {
             putInt("piezas", product.piezas)
             putString("categoria", product.categoria)
             putString("codigo", product.codigo)
+            putString("imagenBase64", product.imagenBase64)
         }
 
         findNavController().navigate(
@@ -112,6 +115,7 @@ class ProductAdapter(
 ) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val imgProducto: ImageView = view.findViewById(R.id.imgProductoItem)
         val nombre: TextView = view.findViewById(R.id.tvNombre)
         val descripcion: TextView = view.findViewById(R.id.tvDescripcion)
         val precio: TextView = view.findViewById(R.id.tvPrecio)
@@ -137,6 +141,15 @@ class ProductAdapter(
         holder.precio.text = "Precio: $${product.precio}"
         holder.piezas.text = "Stock: ${product.piezas}"
         holder.categoria.text = "Categoría: ${product.categoria}"
+
+        if (product.imagenBase64.isNotEmpty()) {
+            val bitmap = ImageUtils.base64ToBitmap(product.imagenBase64)
+            Glide.with(holder.itemView.context)
+                .load(bitmap)
+                .into(holder.imgProducto)
+        } else {
+            holder.imgProducto.setImageResource(R.drawable.logorosi)
+        }
 
         holder.btnEliminar.setOnClickListener {
             onDelete(product)
